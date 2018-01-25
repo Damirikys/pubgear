@@ -1,0 +1,1 @@
+export const CLEAR_STATE_ACTION = 'actions.internal.CLEAR_STATE_ACTION'
