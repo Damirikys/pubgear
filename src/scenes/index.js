@@ -10,7 +10,7 @@ export default class Main extends React.Component {
   async componentDidMount() {
     const userId = await API.playerIdByName('JeMinay')
     if (userId) {
-      const stats = await API.rankedStatsById(userId)
+      const stats = await API.rankedStats({ userId }, { season: '2018-01', server: 'eu', type: '1', mode: 'tpp' })
       this.setState({ user_id: userId, stats })
     }
   }
