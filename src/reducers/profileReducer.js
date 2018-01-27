@@ -2,8 +2,9 @@ import * as actions from '../actions/profileActions'
 import { CLEAR_STATE_ACTION } from '../actions/internalActions'
 
 const initialState = {
-  name: null,
-  userId: null
+  name: 'JeMinay',
+  avatarUrl: null,
+  userId: '5a37133fb2e75f000197c3d5'
 }
 
 export default (state = initialState, action) => {

@@ -5,7 +5,7 @@ import { EU } from '../constants/servers'
 import { SOLO } from '../constants/types'
 import { TPP } from '../constants/modes'
 
-const initialState = {
+export const initialState = {
   season: CURRENT_SEASON,
   server: EU,
   type: SOLO,

@@ -1,26 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { REFRESH_ACTION } from '../actions/internalActions'
 
-import { View, Text } from 'react-native'
+import Router from '../router/router'
 
-import API from '../api'
-
-export default class Main extends React.Component {
-  state = { user_id: 'нет данных по user_id', stats: null }
-
-  async componentDidMount() {
-    const userId = await API.playerIdByName('JeMinay')
-    if (userId) {
-      const stats = await API.rankedStats({ userId }, { season: '2018-01', server: 'eu', type: '1', mode: 'tpp' })
-      this.setState({ user_id: userId, stats })
-    }
+class Main extends React.Component {
+  componentWillMount() {
+    this.props.refreshData()
   }
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', marginTop: 50 }}>
-        <Text>{this.state.user_id}</Text>
-        <Text>{JSON.stringify(this.state.stats, null, 2)}</Text>
-      </View>
+      <Router/>
     )
   }
 }
+
+export default connect(null, dispatch => ({
+  refreshData: () => dispatch({ type: REFRESH_ACTION })
+}))(Main)

@@ -1,4 +1,5 @@
-export const primaryColor = '#292d38'
-export const startGradientColor = '#353b46'
-export const endGradientColor = '#161c2a'
+export const primaryColor = '#07070f'
+export const primaryText = '#d1deff'
+export const startGradientColor = '#0f0c18'
+export const endGradientColor = '#22252e'
 export const accentColor = '#dd8700'

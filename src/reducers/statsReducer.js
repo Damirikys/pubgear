@@ -1,7 +1,9 @@
 import * as actions from '../actions/statsActions'
+import * as modes from '../constants/modes'
+import * as types from '../constants/types'
 import { CLEAR_STATE_ACTION } from '../actions/internalActions'
 
-const initialState = {
+const statsModel = {
   rating: 0,
   maxRank: 0,
   position: 0,
@@ -19,14 +21,26 @@ const initialState = {
   averageTimeSurvive: 0,
 }
 
-export default (state = initialState, action) => {
+const initialState = () => {
+  const state = {}
+
+  Object.values(modes).forEach(mode =>
+    Object.values(types).forEach(type =>
+      state[`${mode}:${type}`] = statsModel
+    )
+  )
+
+  return state
+}
+
+export default (state = initialState(), action) => {
   const { type, payload } = action
 
   switch (type) {
     case actions.STATS_FETCH_SUCCESS:
-      return payload //TODO mapper
+      return payload
     case CLEAR_STATE_ACTION:
-      return initialState
+      return initialState()
   }
 
   return state

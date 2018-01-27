@@ -8,6 +8,10 @@ class APIService {
     return responseText.match(/data-user_id="(\w+)"/)[1]
   }
 
+  playerAvatarByName = async(name) => {
+    //TODO
+  }
+
   rankedStats = async(profile, { season, server, type, mode }) => {
     const response = await fetch(`${BASE_URL}/api/users/${profile.userId}/ranked-stats?season=${season}&server=${server}&queue_size=${type}&mode=${mode}`)
     return await response.json()

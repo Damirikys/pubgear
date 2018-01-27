@@ -53,6 +53,7 @@ class ContentBody extends React.Component {
     const errors = await AsyncStorage.getItem('errors')
     await AsyncStorage.removeItem('errors')
     if (errors) this.props.clearState()
+    //eslint-disable-next-line
     this.setState({ errorsHandled: true })
   }
 
