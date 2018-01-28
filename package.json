@@ -28,8 +28,9 @@
     "redux-saga": "^0.16.0"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
     "babel-eslint": "^6.1.0",
-    "eslint-plugin-react": "^7.1.0"
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^7.1.0",
+    "jest": "^22.1.4"
   }
 }
