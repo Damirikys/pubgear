@@ -1,0 +1,8 @@
+export const EU = 'eu'
+export const AS = 'as'
+export const KRJP = 'krjp'
+export const KAKAO = 'kakao'
+export const NA = 'na'
+export const SA = 'sa'
+export const OC = 'oc'
+export const SEA = 'sea'

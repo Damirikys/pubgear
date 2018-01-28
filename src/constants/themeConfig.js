@@ -1,0 +1,5 @@
+export const primaryColor = '#07070f'
+export const primaryText = '#d1deff'
+export const startGradientColor = '#0f0c18'
+export const endGradientColor = '#22252e'
+export const accentColor = '#dd8700'

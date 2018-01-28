@@ -5,13 +5,20 @@
   "author": "OOO HueMoe",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
+  },
   "dependencies": {
     "@expo/vector-icons": "^6.2.2",
+    "date.format.js": "^2.0.0",
     "expo": "^25.0.0",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-modal": "^4.1.1",
     "react-native-popup-menu": "^0.12.2",
+    "react-native-svg-charts": "^2.2.1",
     "react-native-touchable-safe": "^1.0.2",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.27",
