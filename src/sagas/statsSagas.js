@@ -4,34 +4,23 @@ import { STATS_FETCH_SUCCESS } from '../actions/statsActions'
 
 import { put, select, call, takeLatest } from 'redux-saga/effects'
 import * as actions from '../actions/statsActions'
+import createConfigs from '../constants/configs'
 
-import * as modes from '../constants/modes'
-import * as types from '../constants/types'
+const fetchCombinedStats = async(profile, config) => {
+  const configs = createConfigs(config)
 
-const fetchCombinedStats = (profile, config) => {
-  const configs = []
-
-  Object.values(modes).forEach(mode =>
-    Object.values(types).forEach(type =>
-      configs.push({ ...config, mode, type })
-    )
-  )
-
-  return Promise.all(configs.map(cfg => API.rankedStats(profile, cfg)))
-    .then(response => {
-      const stats = {}
-
-      response.forEach((data, index) =>
-        stats[`${configs[index].mode}:${configs[index].type}`] = data)
-
-      return stats
-    })
+  return await Promise.all(configs.map(params => API.rankedStats(profile, params)))
+    .then(response => response.map((data, index) => ({
+      mode: configs[index].mode,
+      type: configs[index].type,
+      data
+    })))
 }
 
 const fetchStatsSaga = function * () {
   try {
     const { profile, config } = yield select(state => state)
-    const response = yield fetchCombinedStats(profile, config)
+    const response = yield call(fetchCombinedStats, profile, config)
     yield put({ type: STATS_FETCH_SUCCESS, payload: response })
   } catch (e) {
     console.log(e)
