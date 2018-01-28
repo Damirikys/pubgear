@@ -6,7 +6,7 @@ import { put, select, call, takeLatest } from 'redux-saga/effects'
 import * as actions from '../actions/statsActions'
 import createConfigs from '../constants/configs'
 
-const fetchCombinedStats = async(profile, config) => {
+const fetchCombinedStats = async (profile, config) => {
   const configs = createConfigs(config)
 
   return await Promise.all(configs.map(params => API.rankedStats(profile, params)))
