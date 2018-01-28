@@ -1,5 +1,6 @@
 import * as actions from '../actions/statsActions'
 import { CLEAR_STATE_ACTION } from '../actions/internalActions'
+import statsMapper from '../api/statsMapper'
 
 /*
 const statsModel = {
@@ -27,7 +28,7 @@ export default (state = null, action) => {
   switch (type) {
     case actions.STATS_FETCH_SUCCESS:
       return payload.reduce((result, item) => ({
-        ...result, [`${item.mode}:${item.type}`]: item.data
+        ...result, [`${item.mode}:${item.type}`]: statsMapper(item.data)
       }), {})
     case CLEAR_STATE_ACTION:
       return null
