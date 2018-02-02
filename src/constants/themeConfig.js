@@ -1,5 +1,8 @@
 export const primaryColor = '#07070f'
+export const primaryLight = '#3d4250'
 export const primaryText = '#d1deff'
+export const primaryTextDark = '#4d5768'
 export const startGradientColor = '#0f0c18'
 export const endGradientColor = '#22252e'
 export const accentColor = '#dd8700'
+export const accentColorDark = 'rgba(55, 44, 3, 0.5)'

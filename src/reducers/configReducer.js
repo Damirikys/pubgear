@@ -2,14 +2,14 @@ import * as actions from '../actions/configActions'
 import { CLEAR_STATE_ACTION } from '../actions/internalActions'
 import { CURRENT_SEASON } from '../constants/seasons'
 import { EU } from '../constants/servers'
-import { SOLO } from '../constants/types'
-import { TPP } from '../constants/modes'
+import { SQUAD } from '../constants/types'
+import { FPP } from '../constants/modes'
 
 export const initialState = {
   season: CURRENT_SEASON,
   server: EU,
-  type: SOLO,
-  mode: TPP
+  type: SQUAD,
+  mode: FPP
 }
 
 export default (state = initialState, action) => {

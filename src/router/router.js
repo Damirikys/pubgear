@@ -23,54 +23,54 @@ export default class Router extends React.Component {
       }
     },
     Matches: {
-      screen: sceneNavigator('HomeScene'),
+      screen: sceneNavigator('MatchesScene'),
       navigationOptions: {
         tabBarLabel: 'Матчи',
         tabBarIcon: ({ tintColor }) => <Icon name="crosshair" style={tabBarIcon(tintColor)}/>
       }
     },
-    Companions: {
-      screen: sceneNavigator('HomeScene'),
-      navigationOptions: {
-        tabBarLabel: 'Напарники',
-        tabBarIcon: ({ tintColor }) => <Icon name="users" style={tabBarIcon(tintColor)}/>
-      }
-    },
-    Leaderboard: {
-      screen: sceneNavigator('HomeScene'),
-      navigationOptions: {
-        tabBarLabel: 'Таблица лидеров',
-        tabBarIcon: ({ tintColor }) => <Icon name="globe" style={tabBarIcon(tintColor)}/>
-      }
-    },
-    Wiki: {
-      screen: sceneNavigator('HomeScene'),
-      navigationOptions: {
-        tabBarLabel: 'Wiki',
-        tabBarIcon: ({ tintColor }) => <Icon name="info" style={tabBarIcon(tintColor)}/>
-      }
-    },
-    News: {
-      screen: sceneNavigator('HomeScene'),
-      navigationOptions: {
-        tabBarLabel: 'Новости',
-        tabBarIcon: ({ tintColor }) => <Icon name="file-text" style={tabBarIcon(tintColor)}/>
-      }
-    },
-    Posts: {
-      screen: sceneNavigator('HomeScene'),
-      navigationOptions: {
-        tabBarLabel: 'Блоги',
-        tabBarIcon: ({ tintColor }) => <Icon name="radio" style={tabBarIcon(tintColor)}/>
-      }
-    },
-    Calcs: {
-      screen: sceneNavigator('HomeScene'),
-      navigationOptions: {
-        tabBarLabel: 'Сервисы',
-        tabBarIcon: ({ tintColor }) => <Icon name="cpu" style={tabBarIcon(tintColor)}/>
-      }
-    }
+    // Companions: {
+    //   screen: sceneNavigator('HomeScene'),
+    //   navigationOptions: {
+    //     tabBarLabel: 'Напарники',
+    //     tabBarIcon: ({ tintColor }) => <Icon name="users" style={tabBarIcon(tintColor)}/>
+    //   }
+    // },
+    // Leaderboard: {
+    //   screen: sceneNavigator('HomeScene'),
+    //   navigationOptions: {
+    //     tabBarLabel: 'Таблица лидеров',
+    //     tabBarIcon: ({ tintColor }) => <Icon name="globe" style={tabBarIcon(tintColor)}/>
+    //   }
+    // },
+    // Wiki: {
+    //   screen: sceneNavigator('HomeScene'),
+    //   navigationOptions: {
+    //     tabBarLabel: 'Wiki',
+    //     tabBarIcon: ({ tintColor }) => <Icon name="info" style={tabBarIcon(tintColor)}/>
+    //   }
+    // },
+    // News: {
+    //   screen: sceneNavigator('HomeScene'),
+    //   navigationOptions: {
+    //     tabBarLabel: 'Новости',
+    //     tabBarIcon: ({ tintColor }) => <Icon name="file-text" style={tabBarIcon(tintColor)}/>
+    //   }
+    // },
+    // Posts: {
+    //   screen: sceneNavigator('HomeScene'),
+    //   navigationOptions: {
+    //     tabBarLabel: 'Блоги',
+    //     tabBarIcon: ({ tintColor }) => <Icon name="radio" style={tabBarIcon(tintColor)}/>
+    //   }
+    // },
+    // Calcs: {
+    //   screen: sceneNavigator('HomeScene'),
+    //   navigationOptions: {
+    //     tabBarLabel: 'Сервисы',
+    //     tabBarIcon: ({ tintColor }) => <Icon name="cpu" style={tabBarIcon(tintColor)}/>
+    //   }
+    // }
   }
 
   navigator = () => tabNavigator({ ...this.tabs }, buildConfig('Home'))

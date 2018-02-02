@@ -20,8 +20,10 @@ const fetchCombinedStats = async (profile, config) => {
 const fetchStatsSaga = function * () {
   try {
     const { profile, config } = yield select(state => state)
-    const response = yield call(fetchCombinedStats, profile, config)
-    yield put({ type: STATS_FETCH_SUCCESS, payload: response })
+    if (profile.userId) {
+      const response = yield call(fetchCombinedStats, profile, config)
+      yield put({ type: STATS_FETCH_SUCCESS, payload: response })
+    }
   } catch (e) {
     console.log(e)
   }

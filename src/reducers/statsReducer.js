@@ -2,8 +2,7 @@ import * as actions from '../actions/statsActions'
 import { CLEAR_STATE_ACTION } from '../actions/internalActions'
 import statsMapper from '../api/statsMapper'
 
-/*
-const statsModel = {
+export const statsModel = {
   rating: 0,
   maxRank: 0,
   position: 0,
@@ -20,7 +19,6 @@ const statsModel = {
   averageDamageDealt: 0,
   averageTimeSurvive: 0,
 }
-*/
 
 export default (state = null, action) => {
   const { type, payload } = action

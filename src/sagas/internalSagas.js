@@ -1,12 +1,13 @@
-import { put, select, takeLatest } from 'redux-saga/effects'
+import { all, put, select, takeLatest } from 'redux-saga/effects'
 import * as actions from '../actions/internalActions'
+import { MATCHES_FETCH_ACTION } from '../actions/matchesActions';
 import { STATS_FETCH_ACTION } from '../actions/statsActions'
 
 const refreshSaga = function * () {
-  yield put({ type: actions.CLEAR_STATE_ACTION })
-
-  const { profile } = yield select(state => state)
-  if (profile.userId) yield put({ type: STATS_FETCH_ACTION })
+  yield all([
+    put({ type: STATS_FETCH_ACTION }),
+    put({ type: MATCHES_FETCH_ACTION })
+  ])
 }
 
 const internalSaga = function * () {

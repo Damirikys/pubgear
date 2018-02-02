@@ -2,17 +2,17 @@ import * as actions from '../actions/profileActions'
 import { CLEAR_STATE_ACTION } from '../actions/internalActions'
 
 const initialState = {
-  name: 'JeMinay',
-  avatarUrl: null,
-  userId: '5a37133fb2e75f000197c3d5'
+  name: null,
+  avatarUrl: 'http://cdn.akamai.steamstatic.com/steamcommunity/public/images/avatars/d4/d498fe521a44ae573d40528e0648d877e99d0dc2_full.jpg',
+  userId: null
 }
 
 export default (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case actions.PROFILE_SAVE_ACTION:
-      return payload
+    case actions.PROFILE_SEARCH_SUCCESS:
+      return { ...state, ...payload }
     case CLEAR_STATE_ACTION:
       return initialState
   }
