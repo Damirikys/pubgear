@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment/moment'
 import 'moment/locale/ru'
 
-import { FlatList, ScrollView, Text, View } from 'react-native'
+import { FlatList, ScrollView, Text, View, Image } from 'react-native'
 import { Col, Grid, Row } from 'react-native-easy-grid'
 
 import erangel256 from '../../../../assets/images/erangel256'
