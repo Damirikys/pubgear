@@ -19,7 +19,8 @@ const styles = {
   view: {
     paddingVertical: 4,
     borderBottomWidth: 1,
-    borderBottomColor: accentColor
+    borderBottomColor: accentColor,
+    marginBottom: 4
   },
 
   text: {

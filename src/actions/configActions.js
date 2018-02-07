@@ -1,1 +1,1 @@
-export const CONFIG_CHANGE_ACTION = 'actions.config.CONFIG_CHANGE_ACTION'
+export const CHANGE_CONFIG_ACTION = 'actions.config.CHANGE_CONFIG_ACTION'

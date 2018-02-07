@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case actions.PROFILE_SEARCH_SUCCESS:
+    case actions.SEARCH_PROFILE_SUCCESS:
       return { ...state, ...payload }
     case CLEAR_STATE_ACTION:
       return initialState

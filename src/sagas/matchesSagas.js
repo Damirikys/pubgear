@@ -10,8 +10,8 @@ const fetchMatchesSagas = function * ({ payload }) {
 
     yield put({
       type: (payload)
-        ? actions.MATCHES_LOAD_SUCCESS
-        : actions.MATCHES_FETCH_SUCCESS,
+        ? actions.LOAD_MATCHES_SUCCESS
+        : actions.FETCH_MATCHES_SUCCESS,
       payload: response
     })
   } catch (e) {
@@ -38,7 +38,7 @@ const fetchMatchDetails = function * ({ payload }) {
 }
 
 const matchesSagas = function * () {
-  yield takeLatest(actions.MATCHES_FETCH_ACTION, fetchMatchesSagas)
+  yield takeLatest(actions.FETCH_MATCHES_ACTION, fetchMatchesSagas)
   yield takeLatest(actions.FETCH_MATCH_ACTION, fetchMatchDetails)
 }
 

@@ -1,5 +1,6 @@
 import { fork } from 'redux-saga/effects'
 
+import companionsSagas from './companionsSagas'
 import internalSaga from './internalSagas'
 import matchesSagas from './matchesSagas'
 import profileSaga from './profileSagas'
@@ -11,5 +12,6 @@ export const rootSaga = function * () {
     fork(profileSaga),
     fork(statsSaga),
     fork(matchesSagas),
+    fork(companionsSagas)
   ]
 }

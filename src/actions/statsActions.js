@@ -1,2 +1,2 @@
-export const STATS_FETCH_ACTION = 'actions.stats.STATS_FETCH_ACTION'
-export const STATS_FETCH_SUCCESS = 'actions.stats.STATS_FETCH_SUCCESS'
+export const FETCH_STATS_ACTION = 'actions.stats.FETCH_STATS_ACTION'
+export const FETCH_STATS_SUCCESS = 'actions.stats.FETCH_STATS_SUCCESS'

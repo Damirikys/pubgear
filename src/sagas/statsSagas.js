@@ -1,6 +1,6 @@
 import API from '../api'
 
-import { STATS_FETCH_SUCCESS } from '../actions/statsActions'
+import { FETCH_STATS_SUCCESS } from '../actions/statsActions'
 
 import { put, select, call, takeLatest } from 'redux-saga/effects'
 import * as actions from '../actions/statsActions'
@@ -22,7 +22,7 @@ const fetchStatsSaga = function * () {
     const { profile, config } = yield select(state => state)
     if (profile.userId) {
       const response = yield call(fetchCombinedStats, profile, config)
-      yield put({ type: STATS_FETCH_SUCCESS, payload: response })
+      yield put({ type: FETCH_STATS_SUCCESS, payload: response })
     }
   } catch (e) {
     console.log(e)
@@ -30,7 +30,7 @@ const fetchStatsSaga = function * () {
 }
 
 const statsSaga = function * () {
-  yield takeLatest(actions.STATS_FETCH_ACTION, fetchStatsSaga)
+  yield takeLatest(actions.FETCH_STATS_ACTION, fetchStatsSaga)
 }
 
 export default statsSaga

@@ -10,7 +10,7 @@ const fetchProfileSaga = function * (action) {
 
     const name = action.payload
     const userId = yield call(API.playerIdByName, name)
-    yield put({ type: actions.PROFILE_SEARCH_SUCCESS, payload: { name, userId } })
+    yield put({ type: actions.SEARCH_PROFILE_SUCCESS, payload: { name, userId } })
     yield put({ type: REFRESH_ACTION })
   } catch (e) {
     console.log(e)
@@ -18,7 +18,7 @@ const fetchProfileSaga = function * (action) {
 }
 
 const profileSagas = function * () {
-  yield takeLatest(actions.PROFILE_SEARCH_ACTION, fetchProfileSaga)
+  yield takeLatest(actions.SEARCH_PROFILE_ACTION, fetchProfileSaga)
 }
 
 export default profileSagas

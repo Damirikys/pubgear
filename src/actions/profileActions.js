@@ -1,3 +1,3 @@
-export const PROFILE_SEARCH_ACTION = 'actions.profile.PROFILE_SEARCH_ACTION'
-export const PROFILE_SEARCH_SUCCESS = 'actions.profile.PROFILE_SEARCH_SUCCESS'
-export const PROFILE_SAVE_ACTION = 'actions.profile.PROFILE_SAVE_ACTION'
+export const SEARCH_PROFILE_ACTION = 'actions.profile.SEARCH_PROFILE_ACTION'
+export const SEARCH_PROFILE_SUCCESS = 'actions.profile.SEARCH_PROFILE_SUCCESS'
+export const SAVE_PROFILE_ACTION = 'actions.profile.SAVE_PROFILE_ACTION'

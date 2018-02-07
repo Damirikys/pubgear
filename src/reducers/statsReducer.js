@@ -24,7 +24,7 @@ export default (state = null, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case actions.STATS_FETCH_SUCCESS:
+    case actions.FETCH_STATS_SUCCESS:
       return payload.reduce((result, item) => ({
         ...result, [`${item.mode}:${item.type}`]: statsMapper(item.data)
       }), {})

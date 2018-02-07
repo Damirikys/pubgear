@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case actions.CONFIG_CHANGE_ACTION:
+    case actions.CHANGE_CONFIG_ACTION:
       return payload
     case CLEAR_STATE_ACTION:
       return initialState

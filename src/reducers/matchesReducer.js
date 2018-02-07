@@ -10,15 +10,15 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case actions.MATCHES_FETCH_ACTION:
+    case actions.FETCH_MATCHES_ACTION:
       return { ...state, status: true }
-    case actions.MATCHES_LOAD_SUCCESS:
+    case actions.LOAD_MATCHES_SUCCESS:
       return (payload.matches) ? {
         ...state,
         status: false,
         items: [ ...state.items, ...payload.matches.items ]
       } : state
-    case actions.MATCHES_FETCH_SUCCESS:
+    case actions.FETCH_MATCHES_SUCCESS:
       if (!payload.matches) return state
 
       const { summary, items } = payload.matches

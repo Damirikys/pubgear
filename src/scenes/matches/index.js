@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ActivityIndicator, FlatList, ScrollView, } from 'react-native'
-import { MATCHES_FETCH_ACTION } from '../../actions/matchesActions'
+import { FETCH_MATCHES_ACTION } from '../../actions/matchesActions'
 import { accentColor } from '../../constants/themeConfig'
 
 import Body from '../../components/Body'
@@ -51,5 +51,5 @@ export default connect(state => ({
   matches: state.matches.items,
   status: state.matches.status
 }), dispatch => ({
-  loadMatches: offset => dispatch({ type: MATCHES_FETCH_ACTION, payload: offset })
+  loadMatches: offset => dispatch({ type: FETCH_MATCHES_ACTION, payload: offset })
 }))(MatchesScene)

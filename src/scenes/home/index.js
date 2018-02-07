@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Image, Dimensions } from 'react-native'
 
-import { PROFILE_SEARCH_ACTION } from '../../actions/profileActions'
+import { SEARCH_PROFILE_ACTION } from '../../actions/profileActions'
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import Body from '../../components/Body'
@@ -92,5 +92,5 @@ class HomeScene extends React.Component {
 export default connect(state => ({
   stats: state.stats && state.stats['fpp:4']
 }), dispatch => ({
-  searchPlayer: payload => dispatch({ type: PROFILE_SEARCH_ACTION, payload })
+  searchPlayer: payload => dispatch({ type: SEARCH_PROFILE_ACTION, payload })
 }))(HomeScene)

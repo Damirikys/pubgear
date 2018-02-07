@@ -29,13 +29,13 @@ export default class Router extends React.Component {
         tabBarIcon: ({ tintColor }) => <Icon name="crosshair" style={tabBarIcon(tintColor)}/>
       }
     },
-    // Companions: {
-    //   screen: sceneNavigator('HomeScene'),
-    //   navigationOptions: {
-    //     tabBarLabel: 'Напарники',
-    //     tabBarIcon: ({ tintColor }) => <Icon name="users" style={tabBarIcon(tintColor)}/>
-    //   }
-    // },
+    Companions: {
+      screen: sceneNavigator('CompanionsScene'),
+      navigationOptions: {
+        tabBarLabel: 'Напарники',
+        tabBarIcon: ({ tintColor }) => <Icon name="users" style={tabBarIcon(tintColor)}/>
+      }
+    },
     // Leaderboard: {
     //   screen: sceneNavigator('HomeScene'),
     //   navigationOptions: {
