@@ -1,10 +1,13 @@
 import React from 'react'
+import Touchable from 'react-native-touchable-safe';
 import { connect } from 'react-redux'
-import { Image, Dimensions } from 'react-native'
+import { Image, Dimensions, View } from 'react-native'
 
+import Icon from 'react-native-vector-icons'
+import Modal from 'react-native-modal'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import { SEARCH_PROFILE_ACTION } from '../../actions/profileActions'
 
-import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import Body from '../../components/Body'
 import Content from '../../components/Content'
 import Caption from './components/Caption'
@@ -12,8 +15,13 @@ import Header from './components/Header'
 import PieCharts from './components/PieCharts'
 import RecentMatchesStats from './components/RecentMatchesStats'
 import StatItem from './components/StatItem'
+import FilterScene from './filter';
+
+import styles from './styles'
 
 class HomeScene extends React.Component {
+  state = { filterVisible: false }
+
   componentDidMount() {
     this.props.searchPlayer('JeMinay')
   }
@@ -28,6 +36,8 @@ class HomeScene extends React.Component {
     />
   )
 
+  _toggleFilter = () => this.setState({ filterVisible: !this.state.filterVisible })
+
   render() {
     const stats = this.props.stats
     if (!stats) return null
@@ -40,6 +50,24 @@ class HomeScene extends React.Component {
           contentBackgroundColor="transparent"
           renderForeground={this._renderForeground}
           renderBackground={this._renderBackground}
+          renderFixedHeader={() => (
+            <View style={styles.toolbar}>
+              <Touchable outerStyle={styles.settingsIcon}>
+                <Icon.Feather
+                  name="settings"
+                  style={styles.settings}
+                  onPress={this._toggleFilter}
+                />
+              </Touchable>
+              <Touchable outerStyle={styles.accountIcon}>
+                <Icon.MaterialCommunityIcons
+                  name="account-convert"
+                  style={styles.account}
+                  onPress={() => alert('account')}
+                />
+              </Touchable>
+            </View>
+          )}
         >
           <Content>
             <Caption name="Общая сводка"/>
@@ -82,6 +110,13 @@ class HomeScene extends React.Component {
 
             <RecentMatchesStats/>
 
+            <Modal
+              isVisible={this.state.filterVisible}
+              onBackButtonPress={this._toggleFilter}
+              useNativeDriver={true}
+              style={styles.filter}>
+              <FilterScene onBack={this._toggleFilter}/>
+            </Modal>
           </Content>
         </ParallaxScrollView>
       </Body>
@@ -89,8 +124,8 @@ class HomeScene extends React.Component {
   }
 }
 
-export default connect(state => ({
-  stats: state.stats && state.stats['fpp:4']
+export default connect(({ stats, config }) => ({
+  stats: stats && stats[`${config.mode}:${config.type}`]
 }), dispatch => ({
   searchPlayer: payload => dispatch({ type: SEARCH_PROFILE_ACTION, payload })
 }))(HomeScene)

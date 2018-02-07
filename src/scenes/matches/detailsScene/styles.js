@@ -113,7 +113,7 @@ export default StyleSheet.create({
 
   victimItem: {
     borderLeftWidth: 1,
-    borderLeftColor: accentColor,
+    borderLeftColor: 'rgba(255, 255, 255, 0.025)',
     padding: 4
   },
 

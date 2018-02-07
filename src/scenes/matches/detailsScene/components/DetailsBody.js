@@ -53,6 +53,8 @@ export default class DetailsBody extends React.PureComponent {
     const myKiller = match.deaths.find(x => x.victim.user.nickname === profile.name)
     const myVictims = match.deaths.filter(x => x.killer && x.killer.user.nickname === profile.name)
 
+    console.log(myKiller)
+    console.log(myVictims)
     return (
       <ScrollView>
         <View>
@@ -89,11 +91,7 @@ export default class DetailsBody extends React.PureComponent {
                     style={this.styleOfVictim(victim.position)} />
                 ))}
 
-                {[myKiller].map(({ victim }, index) =>
-                  <View
-                    key={index}
-                    style={this.styleOfVictim(victim.position, accentColor)} />
-                )}
+                {myKiller && <View style={this.styleOfVictim(myKiller.victim.position, accentColor)} />}
               </View>
             </View>
 
