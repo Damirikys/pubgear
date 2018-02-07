@@ -1,6 +1,6 @@
 import { all, put, select, takeLatest } from 'redux-saga/effects'
 import * as actions from '../actions/internalActions'
-import { MATCHES_FETCH_ACTION } from '../actions/matchesActions';
+import { MATCHES_FETCH_ACTION } from '../actions/matchesActions'
 import { STATS_FETCH_ACTION } from '../actions/statsActions'
 
 const refreshSaga = function * () {

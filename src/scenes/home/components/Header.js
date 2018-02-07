@@ -119,7 +119,7 @@ class HeadItem extends React.PureComponent {
     color: accentColor,
     fontSize: 12,
     fontFamily: 'Roboto-Light',
-    opacity: 0.5
+    opacity: 0.75
   }
 }
 

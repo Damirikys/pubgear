@@ -1,4 +1,5 @@
-import { persistCombineReducers } from 'redux-persist'
+import { combineReducers } from 'redux'
+import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/es/storage'
 
 import matchesReducer from './matchesReducer'
@@ -6,11 +7,19 @@ import profileReducer from './profileReducer'
 import configReducer from './configReducer'
 import statsReducer from './statsReducer'
 
-const config = { key: 'root', storage }
+const rootConfig = { key: 'root', storage }
 
-export default persistCombineReducers(config, {
+const matchesPersistConfig = {
+  key: 'matches',
+  storage,
+  blacklist: ['data']
+}
+
+const rootReducer = combineReducers({
   profile: profileReducer,
   config: configReducer,
   stats: statsReducer,
-  matches: matchesReducer
+  matches: persistReducer(matchesPersistConfig, matchesReducer)
 })
+
+export default persistReducer(rootConfig, rootReducer)

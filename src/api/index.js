@@ -28,10 +28,12 @@ class APIService {
   }
 
   matchDetails = async (matchId) => {
-    return await Promise.all([
+    const response = await Promise.all([
       fetch(`${BASE_URL}/api/matches/${matchId}`).then(response => response.json()),
       fetch(`${BASE_URL}/api/matches/${matchId}/deaths`).then(response => response.json()),
-    ]).reduce((result, current) => ({ ...result, ...current }), {})
+    ])
+
+    return response.reduce((result, current) => ({ ...result, ...current }), {})
   }
 
   mapsDetails = async () => {

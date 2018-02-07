@@ -118,7 +118,7 @@ export default StyleSheet.create({
     fontSize: 14
   },
 
-  lineChart: { height: 200 },
+  lineChart: { flex: 1, height: 200 },
 
   xaxis: { paddingVertical: 16 },
 
@@ -126,5 +126,5 @@ export default StyleSheet.create({
 
   ratingChart: { flexDirection: 'row', marginVertical: 16 },
 
-  barChart: { flex: 1, marginLeft: 16, height: 200, opacity: 0.7 }
+  barChart: { flex: 1, marginTop: 16, height: 200, opacity: 0.7 }
 })

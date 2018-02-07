@@ -90,7 +90,7 @@ const buildConfig = routeName => ({
   initialRouteName: routeName,
   ...tabNavigator.Presets.AndroidTopTabs,
   tabBarPosition: 'bottom',
-  swipeEnabled: true,
+  swipeEnabled: false,
   animationEnabled: true,
   tabBarOptions: {
     activeTintColor: accentColor,

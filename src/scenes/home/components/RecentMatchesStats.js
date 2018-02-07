@@ -17,7 +17,7 @@ class RecentMatchesStats extends React.PureComponent {
     if (!summary) return null
 
     const barData = [{
-      values: summary.rating_data,
+      values: summary.ranks_list.map(x => 100 - x),
       positive: { fill: accentColor },
       negative: { fill: primaryLight }
     }]
@@ -40,17 +40,9 @@ class RecentMatchesStats extends React.PureComponent {
         />
 
         <View>
-          <LineChart
-            style={styles.lineChart}
-            dataPoints={summary.ranks_list.map(x => 100 - x)}
-            shadowOffset={1}
-            svg={{ stroke: accentColor }}
-            shadowSvg={{
-              stroke: accentColorDark,
-              strokeWidth: 4,
-            }}
-            contentInset={{ top: 20, bottom: 20, left: 10, right: 10 }}
-            curve={shape.curveLinear}
+          <BarChart
+            style={styles.barChart}
+            data={barData}
           />
 
           <XAxis
@@ -92,9 +84,17 @@ class RecentMatchesStats extends React.PureComponent {
             labelStyle={styles.xaxisLabel}
             formatLabel={value => value}
           />
-          <BarChart
-            style={styles.barChart}
-            data={barData}
+          <LineChart
+            style={styles.lineChart}
+            dataPoints={summary.rating_data}
+            shadowOffset={1}
+            svg={{ stroke: accentColor }}
+            shadowSvg={{
+              stroke: accentColorDark,
+              strokeWidth: 4,
+            }}
+            contentInset={{ left: 10 }}
+            curve={shape.curveLinear}
           />
         </View>
 
