@@ -1,0 +1,10 @@
+export const primaryColor = '#07070f'
+export const primaryLight = '#3d4250'
+export const primaryText = '#d1deff'
+export const primaryTextDark = '#4d5768'
+export const startGradientColor = '#0f0c18'
+export const endGradientColor = '#22252e'
+export const accentColor = '#c48639'
+export const accentTextColor = '#985d00'
+export const buttonColor = primaryColor
+export const accentColorDark = 'rgba(55, 44, 3, 0.5)'
