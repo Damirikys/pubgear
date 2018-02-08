@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ActivityIndicator, FlatList, ScrollView, } from 'react-native'
+import { ActivityIndicator, FlatList, ScrollView, Text } from 'react-native'
 import { FETCH_MATCHES_ACTION } from '../../actions/matchesActions'
 import { accentColor } from '../../constants/themeConfig'
 
@@ -8,6 +8,9 @@ import Body from '../../components/Body'
 import Button from '../../components/Button'
 import Content from '../../components/Content'
 import MatchItem from './components/MatchItem'
+
+import localization from '../../localization'
+import styles from './styles'
 
 class MatchesScene extends React.Component {
   _loadMatches = () => {
@@ -17,6 +20,7 @@ class MatchesScene extends React.Component {
   }
 
   render() {
+    const { matches } = localization.locale
     return (
       <Body>
         <ScrollView>
@@ -34,12 +38,12 @@ class MatchesScene extends React.Component {
               <ActivityIndicator
                 style={{ marginVertical: 16 }}
                 color={accentColor} />
-            ) : (
+            ) : this.props.matches.length !== 0 ? (
               <Button
                 onPress={this._loadMatches}
-                text="Еще раньше"
+                text={matches.evenEarlier}
               />
-            )}
+            ) : <Text style={styles.nodata}>{matches.noDataAboutMatches}</Text>}
           </Content>
         </ScrollView>
       </Body>

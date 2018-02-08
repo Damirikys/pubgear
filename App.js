@@ -1,21 +1,26 @@
 import React from 'react'
 import Expo from 'expo'
 
-import { AsyncStorage, Text } from 'react-native'
+import { Text } from 'react-native'
 import { connect, Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
+
+import SplashScreen from './src/components/SplashScreen'
+
+import localization from './src/localization'
 import { CLEAR_STATE_ACTION } from './src/actions/internalActions'
 
 import Main from './src/scenes'
 
 import { persistor, store } from './src/store'
 
-const ErrorUtils = require('ErrorUtils')
-
 export default class App extends React.Component {
   state = { isReady: false }
 
   async componentWillMount() {
+    const lng = await Expo.Util.getCurrentLocaleAsync()
+    localization.init(lng)
+
     await Expo.Font.loadAsync({
       'Roboto-Regular': require('./src/assets/fonts/Roboto-Regular.ttf'),
       'Roboto-Light': require('./src/assets/fonts/Roboto-Light.ttf'),
@@ -26,16 +31,15 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (!this.state.isReady)
-      return <Text>Loading...</Text>
-
     return (
       <Provider store={store}>
         <PersistGate
           persistor={persistor}
           loading={(<Text>Loading...</Text>)}
         >
-          <Content/>
+          {!this.state.isReady ? (
+            <SplashScreen visible/>
+          ) : <Content errors={this.props.exp.errorRecovery}/>}
         </PersistGate>
       </Provider>
     )
@@ -45,15 +49,9 @@ export default class App extends React.Component {
 class ContentBody extends React.Component {
   state = { errorsHandled: false }
 
-  async componentWillMount() {
-    ErrorUtils.setGlobalHandler(() => AsyncStorage.setItem('errors', 'yes'))
-  }
-
-  async componentDidMount() {
-    const errors = await AsyncStorage.getItem('errors')
-    await AsyncStorage.removeItem('errors')
-    if (errors) this.props.clearState()
-    //eslint-disable-next-line
+  componentDidMount() {
+    Expo.ErrorRecovery.setRecoveryProps({ errors: true })
+    if (this.props.errors) this.props.clearState()
     this.setState({ errorsHandled: true })
   }
 

@@ -1,8 +1,8 @@
 {
-  "name": "pubg-stats",
+  "name": "pubgear",
   "version": "0.0.1",
   "description": "(c) 2018",
-  "author": "OOO HueMoe",
+  "author": "JeMinay",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
@@ -23,6 +23,7 @@
     "react-native-parallax-scroll-view": "^0.20.1",
     "react-native-popup-menu": "^0.12.2",
     "react-native-svg-charts": "^2.2.2",
+    "react-native-tiles": "^1.0.1",
     "react-native-touchable-safe": "^1.0.2",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.27",

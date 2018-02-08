@@ -2,12 +2,14 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import Touchable from 'react-native-touchable-safe'
 
+import localization from '../../../localization'
 import styles from '../styles'
 
 export default class CompanionItem extends React.PureComponent {
   state = { expanded: false }
 
   render() {
+    const { companions } = localization.locale
     const user = this.props.item
     return (
       <Touchable onPress={() => this.setState({ expanded: !this.state.expanded })}>
@@ -19,19 +21,19 @@ export default class CompanionItem extends React.PureComponent {
           <View style={styles.rowBetween}>
             <View style={styles.rowBetween}>
               <StatItem
-                name="k/d"
+                name={companions.kd}
                 value={(user.killsCount / user.deathCount).toFixed(2) || 0}
               />
               <StatItem
-                name="топ 1"
+                name={companions.top1}
                 value={user.winMatchesCount}
               />
               <StatItem
-                name="топ 10"
+                name={companions.top10}
                 value={`${(user.topTenMatchesCount / user.matchesCount * 100).toFixed(1) || 0}%`}
               />
               <StatItem
-                name="среднее место"
+                name={companions.avgRank}
                 value={user.averageRank.toFixed()}
               />
             </View>
@@ -42,20 +44,20 @@ export default class CompanionItem extends React.PureComponent {
           {this.state.expanded && (
             <View style={styles.userDetails}>
               <View style={styles.expView}>
-                {this.statBlock('Убийств', user.killsCount)}
-                {this.statBlock('Ассистов', user.assistsCount)}
-                {this.statBlock('% хедшотов', `${(user.headshotKillsCount / user.killsCount * 100).toFixed(2)}%`)}
-                {this.statBlock('Макс. убийств за матч', user.maxKillsPerMatch)}
+                {this.statBlock(companions.kills, user.killsCount)}
+                {this.statBlock(companions.assists, user.assistsCount)}
+                {this.statBlock(companions.headshotsPercent, `${(user.headshotKillsCount / user.killsCount * 100).toFixed(2)}%`)}
+                {this.statBlock(companions.maxKillsPerMatch, user.maxKillsPerMatch)}
               </View>
               <View style={styles.expView}>
-                {this.statBlock('Средний ранг', user.averageRank.toFixed())}
-                {this.statBlock('Средний урон', user.averageDamageDealt.toFixed())}
-                {this.statBlock('Среднее время жизни', `${(user.averageTimeSurvive / 60).toFixed()} мин.`)}
+                {this.statBlock(companions.avgRank, user.averageRank.toFixed())}
+                {this.statBlock(companions.avgDamage, user.averageDamageDealt.toFixed())}
+                {this.statBlock(companions.avgTimeSurvive, `${(user.averageTimeSurvive / 60).toFixed()} ${companions.min}`)}
               </View>
               <View style={styles.expView}>
-                {this.statBlock('ТОП 1', user.winMatchesCount)}
-                {this.statBlock('ТОП 10', user.topTenMatchesCount)}
-                {this.statBlock('Всего матчей', user.matchesCount)}
+                {this.statBlock(companions.top1.toUpperCase(), user.winMatchesCount)}
+                {this.statBlock(companions.top10.toUpperCase(), user.topTenMatchesCount)}
+                {this.statBlock(companions.totalMatches, user.matchesCount)}
               </View>
             </View>
           )}

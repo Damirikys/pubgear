@@ -1,6 +1,5 @@
 import React from 'react'
-import moment from 'moment/moment'
-import 'moment/locale/ru'
+import moment from 'moment'
 
 import { FlatList, ScrollView, Text, View, Image } from 'react-native'
 import { Col, Grid, Row } from 'react-native-easy-grid'
@@ -16,6 +15,7 @@ import Caption from './Caption'
 import StatItem from './StatItem'
 import TeamItem from './TeamItem'
 
+import localization from '../../../../localization'
 import styles from '../styles'
 
 export default class DetailsBody extends React.PureComponent {
@@ -46,6 +46,7 @@ export default class DetailsBody extends React.PureComponent {
   ).toFixed()
 
   render() {
+    const { matches } = localization.locale
     const { stats, team, teams, match, profile } = this.props
     const { combat } = stats
     const { kda, distance_traveled, damage, dbno } = combat
@@ -53,8 +54,6 @@ export default class DetailsBody extends React.PureComponent {
     const myKiller = match.deaths.find(x => x.victim.user.nickname === profile.name)
     const myVictims = match.deaths.filter(x => x.killer && x.killer.user.nickname === profile.name)
 
-    console.log(myKiller)
-    console.log(myVictims)
     return (
       <ScrollView>
         <View>
@@ -100,7 +99,7 @@ export default class DetailsBody extends React.PureComponent {
                 <Caption
                   style={styles.victimsCaption}
                   styleText={styles.victimText}
-                  title="Убиты">
+                  title={matches.deads}>
                   <FlatList
                     data={myVictims}
                     keyExtractor={(item, index) => index}
@@ -119,7 +118,7 @@ export default class DetailsBody extends React.PureComponent {
                 <Caption
                   style={styles.victimsCaption}
                   styleText={styles.victimText}
-                  title="Смерть">
+                  title={matches.dead}>
                   <View style={styles.victimItem}>
                     {myKiller.killer ? (
                       <View>
@@ -136,29 +135,29 @@ export default class DetailsBody extends React.PureComponent {
           </View>
 
           {team.participants.length > 1 && (
-            <Caption title="По команде">
+            <Caption title={matches.aboutTeam}>
               <Grid>
                 <Col>
                   <Row>
                     <Text style={styles.tableTitle}>{' '}</Text>
                   </Row>
                   <Row>
-                    <Text style={styles.tableTitle}>Убийства</Text>
+                    <Text style={styles.tableTitle}>{matches.killsTitle}</Text>
                   </Row>
                   <Row>
-                    <Text style={styles.tableTitle}>Ассисты</Text>
+                    <Text style={styles.tableTitle}>{matches.assistsTitle}</Text>
                   </Row>
                   <Row>
-                    <Text style={styles.tableTitle}>Урон</Text>
+                    <Text style={styles.tableTitle}>{matches.damageTitle}</Text>
                   </Row>
                   <Row>
-                    <Text style={styles.tableTitle}>Вырублено</Text>
+                    <Text style={styles.tableTitle}>{matches.knockdownsTitle}</Text>
                   </Row>
                   <Row>
-                    <Text style={styles.tableTitle}>Пройдено</Text>
+                    <Text style={styles.tableTitle}>{matches.distPassedTitle}</Text>
                   </Row>
                   <Row>
-                    <Text style={styles.tableTitle}>В живых</Text>
+                    <Text style={styles.tableTitle}>{matches.aliveTitle}</Text>
                   </Row>
                 </Col>
                 {team.participants.map(({ user, stats }, index) => (
@@ -179,10 +178,10 @@ export default class DetailsBody extends React.PureComponent {
                       <Text style={styles.tableRowText}>{stats.combat.dbno.knock_downs}</Text>
                     </Row>
                     <Row style={styles.tableRowValue}>
-                      <Text style={styles.tableRowText}>{this.computeSumDistance(stats.combat)} км.</Text>
+                      <Text style={styles.tableRowText}>{this.computeSumDistance(stats.combat)} {matches.km}</Text>
                     </Row>
                     <Row style={styles.tableRowValue}>
-                      <Text style={styles.tableRowText}>{this.computeTimeSurvive(stats.combat)} мин.</Text>
+                      <Text style={styles.tableRowText}>{this.computeTimeSurvive(stats.combat)} {matches.min}</Text>
                     </Row>
                   </Col>
                 ))}
@@ -190,44 +189,44 @@ export default class DetailsBody extends React.PureComponent {
             </Caption>
           )}
 
-          <Caption title="Бой">
+          <Caption title={matches.fightTitle}>
             <Grid style={styles.grid}>
               <Row>
                 <Col size={0.75}>
                   <StatItem
-                    name="убийств / в голову"
+                    name={matches.killshead}
                     value={`${kda.kills} / ${kda.headshot_kills}`}
                   />
                 </Col>
                 <Col size={0.85}>
                   <StatItem
-                    name="ТОП по убийствам"
+                    name={matches.topKillPlace}
                     value={combat.kill_place}
                   />
                 </Col>
                 <Col>
                   <StatItem
-                    name="Макс. расстояние убийства"
-                    value={`${kda.longest_kill.toFixed(1)} м`}
+                    name={matches.maxDistKill}
+                    value={`${kda.longest_kill.toFixed(1)} ${matches.m}`}
                   />
                 </Col>
               </Row>
               <Row>
                 <Col>
                   <StatItem
-                    name="Убийств на машине"
+                    name={matches.roadKills}
                     value={kda.road_kills}
                   />
                 </Col>
                 <Col>
                   <StatItem
-                    name="Разрушено транспорта"
+                    name={matches.vehicleDestroys}
                     value={combat.vehicle_destroys}
                   />
                 </Col>
                 <Col>
                   <StatItem
-                    name="Оружия подобрано"
+                    name={matches.weaponAcquired}
                     value={combat.weapon_acquired}
                   />
                 </Col>
@@ -235,38 +234,38 @@ export default class DetailsBody extends React.PureComponent {
               <Row>
                 <Col>
                   <StatItem
-                    name="Нанесенный урон"
-                    value={`${damage.damage_dealt.toFixed(2)} у.е.`}
+                    name={matches.damageDealt}
+                    value={`${damage.damage_dealt.toFixed(2)}`}
                   />
                 </Col>
               </Row>
             </Grid>
           </Caption>
 
-          <Caption title="Поддержка">
+          <Caption title={matches.supportTitle}>
             <Grid style={styles.grid}>
               <Row>
                 <Col>
                   <StatItem
-                    name="Ассистов"
+                    name={matches.assistsTitle}
                     value={kda.assists}
                   />
                 </Col>
                 <Col>
                   <StatItem
-                    name="Вырублено"
+                    name={matches.knockdownsTitle}
                     value={dbno.knock_downs}
                   />
                 </Col>
                 <Col>
                   <StatItem
-                    name="Поднятно"
+                    name={matches.revivesTitle}
                     value={dbno.revives}
                   />
                 </Col>
                 <Col>
                   <StatItem
-                    name="Убийств своих"
+                    name={matches.teamkillTitle}
                     value={kda.team_kills}
                   />
                 </Col>
@@ -274,55 +273,55 @@ export default class DetailsBody extends React.PureComponent {
             </Grid>
           </Caption>
 
-          <Caption title="Выживание">
+          <Caption title={matches.surviveTitle}>
             <Grid style={styles.grid}>
               <Col>
                 <Row>
                   <StatItem
-                    name="Время жизни"
+                    name={matches.timeSurvive}
                     size={36}
-                    value={`${this.computeTimeSurvive(combat)} мин.`}
+                    value={`${this.computeTimeSurvive(combat)} ${matches.min}`}
                   />
                 </Row>
               </Col>
               <Col>
                 <StatItem
-                  name="Хилы"
+                  name={matches.heals}
                   value={combat.heals}
                 />
                 <StatItem
-                  name="Бусты"
+                  name={matches.boosts}
                   value={combat.boosts}
                 />
               </Col>
             </Grid>
           </Caption>
 
-          <Caption title="Пройдено">
+          <Caption title={matches.distPassedTitle}>
             <Grid style={styles.grid}>
               <Col>
                 <StatItem
-                  name="Пешком"
+                  name={matches.walkDistance}
                   size={24}
-                  value={`${this.formatDistance(distance_traveled.walk_distance)} км.`}
+                  value={`${this.formatDistance(distance_traveled.walk_distance)} ${matches.km}`}
                 />
                 <StatItem
-                  name="На транспорте"
+                  name={matches.roadDistance}
                   size={24}
-                  value={`${this.formatDistance(distance_traveled.ride_distance)} км.`}
+                  value={`${this.formatDistance(distance_traveled.ride_distance)} ${matches.km}`}
                 />
               </Col>
               <Col>
                 <StatItem
-                  name="Вся дистанция"
+                  name={matches.allDistance}
                   size={32}
-                  value={`${this.computeSumDistance({ distance_traveled })} км.`}
+                  value={`${this.computeSumDistance({ distance_traveled })} ${matches.km}`}
                 />
               </Col>
             </Grid>
           </Caption>
 
-          <Caption title="Таблица лидеров">
+          <Caption title={matches.leaderboard}>
             <FlatList
               data={teams}
               style={styles.leaderboard}

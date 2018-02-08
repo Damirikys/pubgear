@@ -1,5 +1,4 @@
 export const BASE_URL = 'https://pubg.op.gg'
-export const BASE_STATIC_URL = 'https://opgg-pubg-static.akamaized.net'
 
 class APIService {
   playerIdByName = async (name) => {
@@ -9,7 +8,13 @@ class APIService {
   }
 
   playerAvatarByName = async (name) => {
-    //TODO
+    try {
+      const response = await fetch(`https://pubg.me/player/${name}`)
+      const responseText = await response.text()
+      return responseText.match(/data-image="(.+)"/)[1]
+    } catch (e) {
+      return null
+    }
   }
 
   rankedStats = async (profile, { season, server, type, mode }) => {

@@ -1,3 +1,7 @@
+export const noavatarUrl = 'https://www.sololearn.com/Images/NoAvatar.jpg'
+
+export const backgroundImg = 'http://image.ibb.co/c7VMJm/erangel.png'
+
 export const typeOf = type => {
   switch(String(type)) {
     case '1': return 'SOLO'

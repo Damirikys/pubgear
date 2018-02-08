@@ -1,9 +1,11 @@
 import React from 'react'
+import moment from 'moment'
+
 import { Text, View } from 'react-native'
 import Touchable from 'react-native-touchable-safe'
-import moment from 'moment'
-import 'moment/locale/ru'
 import { modeOf, typeOf } from '../../../constants/utils'
+
+import localization from '../../../localization'
 import styles from '../styles'
 
 export default class MatchItem extends React.PureComponent {
@@ -11,6 +13,7 @@ export default class MatchItem extends React.PureComponent {
     const { match } = this.props
     const { stats } = match.participant
     const { combat } = stats
+    const { matches } = localization.locale
     return (
       <Touchable onPress={() => this.props.onPress(stats)} outerStyle={this.outerStyle(stats.rank)}>
         <View>
@@ -31,24 +34,24 @@ export default class MatchItem extends React.PureComponent {
 
           <View style={styles.rowBetween}>
             <Block
-              name="время жизни"
-              value={`${(combat.time_survived / 60).toFixed()} мин.`}
+              name={matches.timeSurvive.toLowerCase()}
+              value={`${(combat.time_survived / 60).toFixed()} ${matches.min}`}
             />
             <Block
-              name="убийств/в голову"
+              name={matches.killshead}
               value={`${combat.kda.kills}/${combat.kda.headshot_kills}`}
             />
             <Block
-              name="ассистов"
+              name={matches.assists}
               value={combat.kda.assists}
             />
             <Block
-              name="урон"
+              name={matches.damage}
               value={combat.damage.damage_dealt.toFixed()}
             />
             <Block
-              name="дистанция"
-              value={`${((combat.distance_traveled.walk_distance + combat.distance_traveled.ride_distance) / 1000).toFixed(1)} км`}
+              name={matches.distance}
+              value={`${((combat.distance_traveled.walk_distance + combat.distance_traveled.ride_distance) / 1000).toFixed(1)} ${matches.km}`}
             />
           </View>
         </View>

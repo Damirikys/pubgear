@@ -3,18 +3,21 @@ import { Image, Text, View } from 'react-native'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import { connect } from 'react-redux'
 import { accentColor, primaryText } from '../../../constants/themeConfig'
+import { noavatarUrl } from '../../../constants/utils'
 
+import localization from '../../../localization'
 import styles from '../styles'
 
 class Header extends React.PureComponent {
   render() {
+    const { home } = localization.locale
     const { stats, profile } = this.props
     return (
       <Grid>
         <Row>
           <Col>
             <HeadItem
-              title="позиция в мире"
+              title={home.worldPosition}
               value={stats.position}
               maxValue={stats.maxRank}
               valueSize={32}
@@ -22,7 +25,7 @@ class Header extends React.PureComponent {
           </Col>
           <Col>
             <HeadItem
-              title="среднее место"
+              title={home.avgRank}
               value={stats.averageRank.toFixed()}
               titleSize={12}
               valueSize={72}
@@ -32,7 +35,7 @@ class Header extends React.PureComponent {
         <Row>
           <Col>
             <HeadItem
-              title="ТОП 1"
+              title={home.top1}
               value={stats.winMatchesCount}
               maxValue={stats.matchesCount}
             />
@@ -41,7 +44,7 @@ class Header extends React.PureComponent {
             <View style={styles.avatarView}>
               <Text style={styles.ratingView}>{stats.rating}</Text>
               <Image
-                source={{ uri: profile.avatarUrl }}
+                source={{ uri: profile.avatarUrl || noavatarUrl }}
                 style={styles.avatarImage}
               />
               <Text numberOfLines={1} style={styles.username}>{profile.name}</Text>
@@ -49,7 +52,7 @@ class Header extends React.PureComponent {
           </Col>
           <Col>
             <HeadItem
-              title="ТОП 10"
+              title={home.top10}
               value={stats.topTenMatchesCount}
               maxValue={stats.matchesCount}
             />
@@ -58,28 +61,28 @@ class Header extends React.PureComponent {
         <Row>
           <Col>
             <HeadItem
-              title="убийств"
+              title={home.kills}
               value={stats.killsCount}
               valueSize={36}
             />
           </Col>
           <Col>
             <HeadItem
-              title="ассистов"
+              title={home.assists}
               value={stats.assistsCount}
               valueSize={36}
             />
           </Col>
           <Col>
             <HeadItem
-              title="смертей"
+              title={home.deaths}
               value={stats.deathCount}
               valueSize={36}
             />
           </Col>
           <Col>
             <HeadItem
-              title="K/D"
+              title={home.kd}
               value={(stats.killsCount / stats.deathCount).toFixed(2)}
               valueSize={36}
             />

@@ -9,12 +9,13 @@ import { accentColor, accentColorDark, primaryLight } from '../../../constants/t
 import Caption from './Caption'
 import StatItem from './StatItem'
 
+import localization from '../../../localization'
 import styles from '../styles'
 
 class RecentMatchesStats extends React.PureComponent {
   render() {
     const { summary } = this.props
-    if (!summary) return null
+    if (!summary || summary.matches_cnt === 0) return null
 
     const barData = [{
       values: summary.ranks_list.map(x => 100 - x),
@@ -22,20 +23,22 @@ class RecentMatchesStats extends React.PureComponent {
       negative: { fill: primaryLight }
     }]
 
+    const { home } = localization.locale
+
     return (
       <View>
-        <Caption name="За последние 20 матчей"/>
+        <Caption name={home.last20matches}/>
 
         <StatItem
-          name="Выиграно матчей"
+          name={home.winMatches}
           value={summary.win_matches_cnt}
         />
         <StatItem
-          name="Попаданий в ТОП 10"
+          name={home.enterTop10}
           value={summary.topten_matches_cnt}
         />
         <StatItem
-          name="Среднее место в матче"
+          name={home.avgRankMatch}
           value={summary.ranks_avg.toFixed(2)}
         />
 
@@ -56,27 +59,27 @@ class RecentMatchesStats extends React.PureComponent {
         </View>
 
         <StatItem
-          name="Среднее кол-во убийств за матч"
+          name={home.avgKillsMatch}
           value={summary.kills_avg.toFixed(2)}
         />
         <StatItem
-          name="Среднее кол-во смертей за матч"
+          name={home.avgDeathsMatch}
           value={summary.deaths_avg.toFixed(2)}
         />
         <StatItem
-          name="Средний урон за матч"
+          name={home.avgDamageMatch}
           value={summary.damage_avg.toFixed(2)}
         />
         <StatItem
-          name="Среднее время выживания"
-          value={`${(summary.time_survived_avg / 60).toFixed()} мин.`}
+          name={home.avgTimeSurviveMatch}
+          value={`${(summary.time_survived_avg / 60).toFixed()} ${home.min}`}
         />
         <StatItem
-          name="Максимум убийств за матч"
+          name={home.maxKillsPerMatch}
           value={summary.kills_max}
         />
 
-        <Caption name="Изменения рейтинга"/>
+        <Caption name={home.ratingChangeTitle}/>
 
         <View style={styles.ratingChart}>
           <YAxis
@@ -99,7 +102,7 @@ class RecentMatchesStats extends React.PureComponent {
         </View>
 
         <StatItem
-          name="Всего"
+          name={home.total}
           value={summary.rating_data.reduce((r, c) => r + c).toFixed(2)}
         />
 

@@ -1,12 +1,14 @@
 import React from 'react'
-import Touchable from 'react-native-touchable-safe';
 import { connect } from 'react-redux'
 import { Image, Dimensions, View } from 'react-native'
 
 import Icon from 'react-native-vector-icons'
 import Modal from 'react-native-modal'
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
-import { SEARCH_PROFILE_ACTION } from '../../actions/profileActions'
+import Touchable from 'react-native-touchable-safe'
+
+import { CLEAR_STATE_ACTION } from '../../actions/internalActions'
+import { backgroundImg } from '../../constants/utils'
 
 import Body from '../../components/Body'
 import Content from '../../components/Content'
@@ -15,16 +17,13 @@ import Header from './components/Header'
 import PieCharts from './components/PieCharts'
 import RecentMatchesStats from './components/RecentMatchesStats'
 import StatItem from './components/StatItem'
-import FilterScene from './filter';
+import FilterScene from './filter'
 
+import localization from '../../localization'
 import styles from './styles'
 
 class HomeScene extends React.Component {
   state = { filterVisible: false }
-
-  componentDidMount() {
-    this.props.searchPlayer('JeMinay')
-  }
 
   _renderForeground = () => <Header stats={this.props.stats}/>
 
@@ -32,15 +31,19 @@ class HomeScene extends React.Component {
     <Image
       style={{ width: '100%', height: '100%', opacity: 0.085 }}
       resizeMode={Image.resizeMode.cover}
-      source={{ uri: 'http://image.ibb.co/c7VMJm/erangel.png' }}
+      source={{ uri: backgroundImg }}
     />
   )
 
   _toggleFilter = () => this.setState({ filterVisible: !this.state.filterVisible })
 
+  _toggleExit = () => this.props.clearState()
+
   render() {
+    const { home } = localization.locale
     const stats = this.props.stats
-    if (!stats) return null
+    if (!stats) return <Body/>
+
     return (
       <Body>
         <ParallaxScrollView
@@ -52,59 +55,61 @@ class HomeScene extends React.Component {
           renderBackground={this._renderBackground}
           renderFixedHeader={() => (
             <View style={styles.toolbar}>
-              <Touchable outerStyle={styles.settingsIcon}>
+              <Touchable
+                onPress={this._toggleFilter}
+                outerStyle={styles.settingsIcon}>
                 <Icon.Feather
                   name="settings"
                   style={styles.settings}
-                  onPress={this._toggleFilter}
                 />
               </Touchable>
-              <Touchable outerStyle={styles.accountIcon}>
+              <Touchable
+                onPress={this._toggleExit}
+                outerStyle={styles.accountIcon}>
                 <Icon.MaterialCommunityIcons
                   name="account-convert"
                   style={styles.account}
-                  onPress={() => alert('account')}
                 />
               </Touchable>
             </View>
           )}
         >
           <Content>
-            <Caption name="Общая сводка"/>
+            <Caption name={home.generalTitle}/>
 
             <StatItem
-              name="Максимум убийств за матч"
+              name={home.maxKillsPerMatch}
               value={stats.maxKillsPerMatch}
             />
             <StatItem
-              name="Количество хедшотов"
+              name={home.headshotsCount}
               value={stats.headshotKillsCount}
             />
             <StatItem
-              name="Процент хедшотов"
+              name={home.headshotsPercent}
               value={`${(stats.headshotKillsCount / stats.killsCount * 100).toFixed(2)}%`}
             />
 
             <PieCharts stats={stats}/>
 
             <StatItem
-              name="Самый дальний выстрел"
-              value={`${stats.longestKill.toFixed()} метров`}
+              name={home.longestKill}
+              value={`${stats.longestKill.toFixed()} ${home.m}`}
             />
             <StatItem
-              name="Средний наносимый урон"
+              name={home.avgDamage}
               value={(stats.averageDamageDealt).toFixed(2)}
             />
             <StatItem
-              name="Среднее время жизни"
-              value={`${(stats.averageTimeSurvive / 60).toFixed()} мин.`}
+              name={home.avgTimeSurvive}
+              value={`${(stats.averageTimeSurvive / 60).toFixed()} ${home.min}`}
             />
             <StatItem
-              name="Всего сыграно матчей"
+              name={home.matchesCount}
               value={stats.matchesCount}
             />
             <StatItem
-              name="KDA рейтинг"
+              name={home.kda}
               value={((stats.killsCount + stats.assistsCount) / stats.deathCount).toFixed(2)}
             />
 
@@ -124,8 +129,9 @@ class HomeScene extends React.Component {
   }
 }
 
-export default connect(({ stats, config }) => ({
-  stats: stats && stats[`${config.mode}:${config.type}`]
+export default connect(({ stats, config, progress }) => ({
+  stats: stats && stats[`${config.mode}:${config.type}`],
+  progress: progress
 }), dispatch => ({
-  searchPlayer: payload => dispatch({ type: SEARCH_PROFILE_ACTION, payload })
+  clearState: () => dispatch({ type: CLEAR_STATE_ACTION })
 }))(HomeScene)

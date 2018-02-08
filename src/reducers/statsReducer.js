@@ -20,9 +20,7 @@ export const statsModel = {
   averageTimeSurvive: 0,
 }
 
-export default (state = null, action) => {
-  const { type, payload } = action
-
+export default (state = null, { type, payload }) => {
   switch (type) {
     case actions.FETCH_STATS_SUCCESS:
       return payload.reduce((result, item) => ({

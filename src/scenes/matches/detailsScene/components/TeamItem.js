@@ -5,6 +5,7 @@ import { accentColor, accentTextColor, primaryText, primaryTextDark } from '../.
 
 import StatItem from './StatItem'
 
+import localization from '../../../../localization'
 import styles from '../styles'
 
 export default class TeamItem extends React.PureComponent {
@@ -21,10 +22,11 @@ export default class TeamItem extends React.PureComponent {
 
     distance: (this.props.team.participants.reduce((res, { stats }) => (
       res + stats.combat.distance_traveled.walk_distance + stats.combat.distance_traveled.ride_distance
-    ), 0) / 1000).toFixed(2) + ' км.',
+    ), 0) / 1000).toFixed(2) + ' ' + localization.locale.matches.km,
   }
 
   render() {
+    const { matches } = localization.locale
     const { team, isMyTeam } = this.props
     return (
       <Grid style={styles.teamItem}>
@@ -48,17 +50,17 @@ export default class TeamItem extends React.PureComponent {
           <Grid style={styles.grid}>
             <Row>
               <StatItem
-                name="Убитых"
+                name={matches.deadsCount}
                 size={16}
                 value={this.state.killsCount}
               />
               <StatItem
-                name="Урона"
+                name={matches.damageCount}
                 size={16}
                 value={this.state.damageAll}
               />
               <StatItem
-                name="Пройдено"
+                name={matches.distPassedTitle}
                 size={16}
                 value={this.state.distance}
               />

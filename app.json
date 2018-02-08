@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "pubgstats",
-    "description": "PUBG Stats application.",
-    "slug": "pubgstats",
+    "name": "PUBGEAR",
+    "description": "PUBGEAR: PUBG stats, match reviews, teammates",
+    "slug": "pubgear",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
@@ -11,11 +11,28 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": false
+      "bundleIdentifier": "pro.jeminay.pubgear",
+      "supportsTablet": false,
+      "usesIcloudStorage": true,
+      "icon": "./assets/icon.png"
+    },
+    "android": {
+      "package": "pro.jeminay.pubgear",
+      "icon": "./assets/icon.png",
+      "versionCode": 5,
+      "permissions": [
+        "READ_INTERNAL_STORAGE",
+        "WRITE_INTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "MANAGE_DOCUMENTS",
+        "SYSTEM_ALERT_WINDOW",
+        "ACCESS_NETWORK_STATE"
+      ]
     }
   }
 }

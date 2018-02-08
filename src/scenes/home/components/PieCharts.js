@@ -2,6 +2,8 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { PieChart } from 'react-native-svg-charts'
 import { accentColor, endGradientColor } from '../../../constants/themeConfig'
+
+import localization from '../../../localization'
 import styles from '../styles'
 
 const colorBox = (color = 'white') => ({
@@ -49,6 +51,7 @@ export default class PieCharts extends React.PureComponent {
 
   render() {
     const { kills, matches } = this.state
+    const { home } = localization.locale
     return (
       <View style={styles.pieChartsView}>
         <View style={styles.flex}>
@@ -62,7 +65,7 @@ export default class PieCharts extends React.PureComponent {
             <View>
               <View style={styles.row}>
                 <View style={colorBox(accentColor)}/>
-                <Text style={styles.pieChartCaptionText}>ХЕДШОТЫ</Text>
+                <Text style={styles.pieChartCaptionText}>{home.headshots}</Text>
               </View>
             </View>
           </View>
@@ -78,11 +81,11 @@ export default class PieCharts extends React.PureComponent {
             <View>
               <View style={styles.row}>
                 <View style={colorBox(accentColor)}/>
-                <Text style={styles.pieChartCaptionText}>ТОП 10</Text>
+                <Text style={styles.pieChartCaptionText}>{home.top10}</Text>
               </View>
               <View style={styles.row}>
                 <View style={colorBox('green')}/>
-                <Text style={styles.pieChartCaptionText}>ТОП 1</Text>
+                <Text style={styles.pieChartCaptionText}>{home.top1}</Text>
               </View>
             </View>
           </View>

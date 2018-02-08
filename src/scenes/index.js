@@ -1,8 +1,11 @@
 import React from 'react'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { REFRESH_ACTION } from '../actions/internalActions'
 
 import Router from '../router/router'
+import SearchScene from './search'
+import SplashScreen from '../components/SplashScreen'
 
 class Main extends React.Component {
   componentWillMount() {
@@ -11,11 +14,16 @@ class Main extends React.Component {
 
   render() {
     return (
-      <Router/>
+      <View style={{ flex: 1 }}>
+        {this.props.profile.userId ? <Router/> : <SearchScene/>}
+        <SplashScreen/>
+      </View>
     )
   }
 }
 
-export default connect(null, dispatch => ({
+export default connect(state => ({
+  profile: state.profile
+}), dispatch => ({
   refreshData: () => dispatch({ type: REFRESH_ACTION })
 }))(Main)

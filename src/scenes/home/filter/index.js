@@ -15,6 +15,7 @@ import * as types from '../../../constants/types'
 import { accentTextColor } from '../../../constants/themeConfig'
 import { CHANGE_CONFIG_ACTION } from '../../../actions/configActions'
 
+import localization from '../../../localization'
 import styles from '../styles'
 
 class FilterScene extends React.Component {
@@ -43,6 +44,7 @@ class FilterScene extends React.Component {
 
   render() {
     const config = this.state
+    const { home } = localization.locale
     return (
       <View style={styles.modal}>
         <View>
@@ -73,12 +75,12 @@ class FilterScene extends React.Component {
               style={styles.season}
               date={config.season}
               mode="date"
-              placeholder="Выбрать сезон"
+              placeholder={home.chooseSeason}
               format="YYYY-MM"
               minDate={MIN_SEASON}
               maxDate={CURRENT_SEASON}
-              confirmBtnText="ОК"
-              cancelBtnText="Назад"
+              confirmBtnText={home.ok}
+              cancelBtnText={home.back}
               showIcon={false}
               androidMode="spinner"
               customStyles={this._datePickerStyles}
@@ -90,7 +92,7 @@ class FilterScene extends React.Component {
         <View style={styles.saveBtn}>
           <Button
             onPress={this._onSubmit}
-            text="Сохранить"/>
+            text={home.save}/>
         </View>
       </View>
     )

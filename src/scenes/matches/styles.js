@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { accentColor, primaryColor, primaryLight, primaryText } from '../../constants/themeConfig'
+import { primaryText } from '../../constants/themeConfig'
 
 export default StyleSheet.create({
   row: {
@@ -10,6 +10,15 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 4
+  },
+
+  nodata: {
+    fontSize: 18,
+    color: primaryText,
+    fontFamily: 'Roboto-Light',
+    alignSelf: 'center',
+    marginTop: 24,
+    opacity: 0.25
   },
 
   fromNow: {

@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ActivityIndicator, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import { FETCH_MATCH_ACTION } from '../../../actions/matchesActions'
 
 import Body from '../../../components/Body'
 import Content from '../../../components/Content'
 import DetailsBody from './components/DetailsBody'
-import { accentColor } from '../../../constants/themeConfig'
 
 class DetailsScene extends React.Component {
   componentWillMount() {
@@ -25,11 +24,7 @@ class DetailsScene extends React.Component {
       <Body>
         <ScrollView>
           <Content>
-            {!this.props.match ? (
-              <ActivityIndicator
-                style={{ marginVertical: 16 }}
-                color={accentColor} />
-            ) : (
+            {this.props.match && (
               <DetailsBody
                 team={team}
                 match={match}

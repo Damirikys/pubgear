@@ -26,17 +26,7 @@ export default (state = initialState, { type, payload }) => {
         ...state, items, status: false,
         summary: {
           ...summary,
-          rating_data: items.map(x => x.participant.stats.rating_delta),
-          kills_data: items.map(x => x.participant.stats.combat.kda.kills),
-          assists_data: items.map(x => x.participant.stats.combat.kda.assists),
-          boosts_data: items.map(x => x.participant.stats.combat.boosts),
-          heals_data: items.map(x => x.participant.stats.combat.heals),
-          weapon_acquired_data: items.map(x => x.participant.stats.combat.weapon_acquired),
-          walk_distance_data: items.map(x => x.participant.stats.combat.distance_traveled.walk_distance),
-          ride_distance_data: items.map(x => x.participant.stats.combat.distance_traveled.ride_distance),
-          damage_dealt_data: items.map(x => x.participant.stats.combat.damage.damage_dealt),
-          knocks_data: items.map(x => x.participant.stats.combat.dbno.knock_downs),
-          revives_data: items.map(x => x.participant.stats.combat.dbno.revives)
+          rating_data: items.map(x => x.participant.stats.rating_delta)
         }
       }
     case actions.FETCH_MATCH_SUCCESS:
