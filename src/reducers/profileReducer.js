@@ -2,16 +2,16 @@ import * as actions from '../actions/profileActions'
 import { CLEAR_STATE_ACTION } from '../actions/internalActions'
 
 const initialState = {
-  name: 'JeMinay',
+  name: null,
   avatarUrl: null,
-  userId: '5a37133fb2e75f000197c3d5'
+  userId: null
 }
 
-export default (state = initialState, action) => {
-  const { type, payload } = action
-
+export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case actions.PROFILE_SAVE_ACTION:
+    case actions.SEARCH_PROFILE_SUCCESS:
+      return { ...state, ...payload }
+    case actions.APPLY_PROFILE_ACTION:
       return payload
     case CLEAR_STATE_ACTION:
       return initialState

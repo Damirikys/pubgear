@@ -1,0 +1,1 @@
+export const NEW_QUERY_SUCCESS = 'actions.queries.NEW_QUERY_SUCCESS'
