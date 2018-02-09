@@ -16,7 +16,7 @@ const colorBox = (color = 'white') => ({
 })
 
 export default class PieCharts extends React.PureComponent {
-  state = {
+  createState = () => ({
     matches: [
       {
         value: this.props.stats.matchesCount - (this.props.stats.winMatchesCount + this.props.stats.topTenMatchesCount),
@@ -47,10 +47,10 @@ export default class PieCharts extends React.PureComponent {
         key: 'headshot kills count'
       }
     ]
-  }
+  })
 
   render() {
-    const { kills, matches } = this.state
+    const { kills, matches } = this.createState()
     const { home } = localization.locale
     return (
       <View style={styles.pieChartsView}>

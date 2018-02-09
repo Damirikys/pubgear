@@ -17,8 +17,6 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
     case actions.SAVE_CONFIG_ACTION:
       return payload
-    case CLEAR_STATE_ACTION:
-      return initialState
   }
 
   return state

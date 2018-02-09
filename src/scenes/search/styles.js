@@ -3,7 +3,7 @@ import { primaryLight, primaryText } from '../../constants/themeConfig';
 
 export default StyleSheet.create({
   logoWrapper: { flex: 1, justifyContent: 'center' },
-  logo: { marginVertical: 40, alignItems: 'center', justifyContent: 'center' },
+  logo: { marginTop: -60, marginBottom: 40, alignItems: 'center', justifyContent: 'center' },
   viewedText: {
     fontSize: 14,
     fontFamily: 'Roboto-Light',
@@ -13,7 +13,7 @@ export default StyleSheet.create({
     opacity: 0.5
   },
 
-  logoImg: { width: Dimensions.get('window').width / 1.5, height: 100 },
+  logoImg: { width: Dimensions.get('window').width / 1.75, height: 70 },
 
   searchInput: {
     width: '100%',

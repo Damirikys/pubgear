@@ -21,6 +21,7 @@ class SearchScene extends React.Component {
         <View style={styles.logoWrapper}>
           <View style={styles.logo}>
             <Image
+              resizeMode="contain"
               style={styles.logoImg}
               source={{ uri: pubgear }}
             />
