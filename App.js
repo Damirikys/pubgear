@@ -35,7 +35,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <PersistGate
           persistor={persistor}
-          loading={(<Text>Loading...</Text>)}
+          loading={(<SplashScreen visible/>)}
         >
           {!this.state.isReady ? (
             <SplashScreen visible/>
