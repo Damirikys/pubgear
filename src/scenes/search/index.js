@@ -1,9 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import localization from '../../localization'
 import { Image, ScrollView, Text, TextInput, View } from 'react-native'
-import { APPLY_PROFILE_ACTION, SEARCH_PROFILE_ACTION } from '../../actions/profileActions'
 import Touchable from 'react-native-touchable-safe'
+import Icon from 'react-native-vector-icons/Feather'
+
+import localization from '../../localization'
+import { APPLY_PROFILE_ACTION, SEARCH_PROFILE_ACTION } from '../../actions/profileActions'
 import Body from '../../components/Body'
 import { primaryLight } from '../../constants/themeConfig'
 import { noavatarUrl } from '../../constants/utils'
@@ -26,14 +28,20 @@ class SearchScene extends React.Component {
             />
           </View>
 
-          <TextInput
-            style={styles.searchInput}
-            underlineColorAndroid="transparent"
-            placeholder={search.placeholder}
-            placeholderTextColor={primaryLight}
-            onChangeText={text => this.searchInput = text}
-            onSubmitEditing={this._submit}
-          />
+          <View>
+            <TextInput
+              style={styles.searchInput}
+              underlineColorAndroid="transparent"
+              placeholder={search.placeholder}
+              placeholderTextColor={primaryLight}
+              onChangeText={text => this.searchInput = text}
+              onSubmitEditing={this._submit}
+            />
+
+            <Touchable style={styles.searchButton} onPress={this._submit} >
+              <Icon style={styles.searchIcon} name="search"/>
+            </Touchable>
+          </View>
 
           {this.props.queries.length !== 0 && (
             <View>

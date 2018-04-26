@@ -13,18 +13,22 @@ export default StyleSheet.create({
     opacity: 0.5
   },
 
-  logoImg: { width: Dimensions.get('window').width / 2, height: 70 },
+  logoImg: { width: Dimensions.get('window').width / 1.75, height: 70 },
 
   searchInput: {
     width: '100%',
     height: 60,
     paddingVertical: 16,
-    paddingHorizontal: 42,
+    paddingLeft: 30,
+    paddingRight: 60,
     backgroundColor: 'rgba(0, 0, 0, 0.15)',
     fontSize: 24,
     fontFamily: 'Roboto-Light',
     color: primaryText
   },
+
+  searchButton: { position: 'absolute', right: 15, top: 15 },
+  searchIcon: { color: '#a87220', fontSize: 30 },
 
   lastViewed: { flexDirection: 'row', marginHorizontal: 12, marginVertical: 8 },
 
